@@ -1,0 +1,16 @@
+lockfileVersion: 5.4
+
+specifiers:
+  rjweb-server: ^2.8.4
+
+dependencies:
+  rjweb-server: registry.npmjs.org/rjweb-server/2.8.4
+
+packages:
+
+  registry.npmjs.org/rjweb-server/2.8.4:
+    resolution: {integrity: sha512-qsCiY5dEAsr6y6RBJLzvK7GPI79URuNrLO9X6G2iFJ7BbqN23qSN4AZ5f3Uv6QXf771LebZphZy5bynr9oWm4A==, registry: https://registry.npmjs.cf/, tarball: https://registry.npmjs.org/rjweb-server/-/rjweb-server-2.8.4.tgz}
+    name: rjweb-server
+    version: 2.8.4
+    hasBin: true
+    dev: false
