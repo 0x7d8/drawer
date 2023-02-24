@@ -9,7 +9,7 @@
   <title>0xDRAWER</title>
 </head>
 <body style="background-color: #ffffff" onload="body = document.querySelector('body')">
-  <div class="flex bg-gray-800" style="height: 50px">
+  <nav class="flex bg-gray-800" style="height: 50px">
     <button id="export-button" class="ml-2 bg-gray-500 rounded p-2 hover:bg-gray-400" onclick="exportData()">
       export
     </button>
@@ -36,9 +36,8 @@
       class="ml-2 bg-gray-500 justify-self-end h-full rounded p-2 hover:bg-gray-400 cursor-pointer"
       onchange="changeBackground()"
     >
-  </div>
-  <div id="image" style="margin-top: -50px; width: 100vw; height: 100vh" onload="image = document.querySelector('#image')">
-  </div>
+    <div id="image" style="position: absolute; left: 0px; top: 50px; width: 100vw; height: calc(100vh - 50px)" onload="image = document.querySelector('#image')">
+  </nav>
 
   <dialog id="import-modal" class="rounded bg-gray-900 w-96 h-56 backdrop:bg-black backdrop:opacity-50">
     <form method="dialog">
@@ -75,7 +74,7 @@
   window.ondragstart = () => false
 
   const pixelCSS = (positions, shape, color, size) => {
-    const defaultCSS = `position: absolute; margin-top: ${positions.y}px; margin-left: ${positions.x}px; width: ${size * 2}px; height: ${size * 2}px; `
+    const defaultCSS = `position: absolute; translate -50% -50%; top: ${positions.y - 50 - size}px; left: ${positions.x - size}px; width: ${size * 2}px; height: ${size * 2}px; `
 
     switch (shape) {
       case "cube-normal":
@@ -93,7 +92,7 @@
   }
 
   let pixelCount = 0, size = 4, data = {
-    fileVersion: 1,
+    fileVersion: 1.1,
     drawShape: 'cube-normal',
     drawColor: '#000000',
     drawSize: 16,
@@ -126,7 +125,7 @@
           pixel.id = `pixel-${++pixelCount}`
           pixel.style = pixelCSS(info, info.shape, info.color, info.size)
           image.appendChild(pixel)
-        }; alert(`Successfully Imported ${pixelCount} Pixels (${(new Blob([ JSON.stringify(inputData) ]).size / 1024).toFixed(2)}KB)`)
+        }; alert(`Successfully Imported ${pixelCount} Pixels (${(new Blob([ event.target.result ]).size / 1024).toFixed(2)}KB)`)
       }
     }
   }
@@ -184,8 +183,6 @@
 
   image.onmouseup = () => window.mouseIsDown = false
   image.onmousedown = (event) => {
-    if (event.pageY < 50) return
-
     window.mouseIsDown = true
 
     const color = document.querySelector('#color-picker').value
@@ -197,7 +194,7 @@
     pixel.style = pixelCSS({ x: event.pageX, y: event.pageY }, shape, color, size)
     image.appendChild(pixel)
   }; image.onmousemove = (event) => {
-    if (event.pageY < 50 || !window.mouseIsDown) return
+    if (!window.mouseIsDown) return
 
     const color = document.querySelector('#color-picker').value
     const size = Number(document.querySelector('#size-slider').value)

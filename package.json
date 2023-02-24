@@ -1,13 +1,13 @@
 {
-  "main": "index.js",
+  "main": "index.mjs",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "rjweb-server": "^2.8.4"
+    "rjweb-server": "^3.0.0"
   }
 }
