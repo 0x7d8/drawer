@@ -8,6 +8,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "rjweb-server": "^3.0.0"
+    "rjweb-server": "^4.0.0"
   }
 }
